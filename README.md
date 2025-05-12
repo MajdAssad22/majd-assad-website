@@ -17,7 +17,7 @@ A fast, modern, and responsive developer portfolio built with **React** and **Vi
 - [React](https://reactjs.org/)
 - [Vite](https://vitejs.dev/)
 - [TailwindCSS](https://tailwindcss.com/)
-- [React Router](https://reactrouter.com/) _(optional for multi-page structure)_
+- [React Router](https://reactrouter.com/)
 
 ## Project Structure
 
@@ -67,7 +67,7 @@ The production-ready files will be generated in the `dist/` directory.
 - [React](https://reactjs.org/) – for building the UI
 - [Vite](https://vitejs.dev/) – for the fast development experience
 - [Credly](https://www.credly.com/) – for badge integration
-- [Lucide React](https://lucide.dev/)– for icons
+- [Lucide React](https://lucide.dev/) – for icons
 - Open-source projects and the developer community for inspiration
 
 ---
