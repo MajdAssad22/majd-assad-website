@@ -85,7 +85,7 @@ const CustomCursor = () => {
         style={{
           left: `${position.x - 4}px`,
           top: `${position.y - 4}px`,
-          transform: `scale(${isPointer ? 1 : 1.5})`,
+          transform: `scale(${isPointer ? 0.5 : 1.5})`,
         }}
       />
     </>

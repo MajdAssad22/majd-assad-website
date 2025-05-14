@@ -46,10 +46,10 @@ const Home = () => {
                       onMouseEnter={() => setShowImage(true)}
                       onMouseLeave={() => setShowImage(false)}
                     >
-                      <span className="relative z-10 text-primary-600 cursor-cell group-hover:text-primary-100 transition-colors duration-300">
+                      <span className="relative z-10 text-primary-600 cursor-cell group-hover:dark:text-primary-100 group-hover:text-neutral-900 transition-colors duration-300">
                         Majd Assad
                       </span>
-                      <span className="absolute -bottom-1 left-0 w-full h-2 bg-primary-600/20 -rotate-1 group-hover:bg-white/20 transition-colors duration-300" />
+                      <span className="absolute -bottom-1 left-0 w-full h-2 bg-primary-600/20 -rotate-1 group-hover:dark:bg-white/40 group-hover:bg-neutral-900/40 transition-colors duration-300" />
 
                       {/* Hover Image */}
                       <div

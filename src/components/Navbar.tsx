@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import PageTransition from "./PageTransition";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -120,7 +121,7 @@ const Navbar = () => {
         <div
           className={`transition-all duration-500 px-4 sm:px-6 lg:px-8 ${
             scrolled
-              ? "bg-neutral-900/85 dark:bg-neutral-900/85 shadow-lg backdrop-blur-md"
+              ? "bg-neutral-100/95 dark:bg-neutral-900/85 shadow-lg backdrop-blur-md"
               : "bg-transparent"
           }`}
         >
@@ -139,16 +140,19 @@ const Navbar = () => {
               </span>
             </Link>
 
-            {/* Hamburger button */}
-            <button
-              className="p-5 rounded-md text-neutral-400 hover:text-primary-500 focus:outline-none transition-colors duration-300"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              <Menu size={24} className="text-primary-700" />
-            </button>
+            <div>
+              <ThemeToggle />
+              <button
+                className="p-5 rounded-md text-neutral-400 hover:text-primary-500 focus:outline-none transition-colors duration-300"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                <Menu size={24} className="text-primary-700" />
+              </button>
+            </div>
           </div>
         </div>
+        {/* Hamburger button */}
       </PageTransition>
 
       {/* Full-screen Navigation Menu */}
@@ -159,7 +163,7 @@ const Navbar = () => {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-0 h-screen bg-neutral-900/95 dark:bg-neutral-900/95 z-60 backdrop-blur-md"
+            className="fixed inset-0 h-screen bg-neutral-100/95 dark:bg-neutral-900/95 z-60 backdrop-blur-md"
             onClick={(e) => {
               // Close menu when clicking outside the menu content
               if (e.target === e.currentTarget) {
