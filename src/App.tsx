@@ -11,6 +11,7 @@ import ProjectDetail from "./pages/projects/ProjectDetail.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 import LoadingScreen from "./components/LoadingScreen";
 import { ThemeProvider } from "./context/ThemeContext";
+import Thankyou from "./pages/Thankyou.tsx";
 
 function App() {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -43,6 +44,7 @@ function App() {
                     <Route path="/projects" element={<Projects />} />
                     <Route path="/projects/:slug" element={<ProjectDetail />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/thank-you" element={<Thankyou />} />
                   </Routes>
                 </main>
               </>
