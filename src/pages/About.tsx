@@ -84,9 +84,9 @@ const About = () => {
               {skills.map((skillGroup) => (
                 <div key={skillGroup.category} className="card ">
                   <div className="p-6">
-                    <div className="flex items-center mb-4">
-                      <skillGroup.icon className="w-6 h-6" />
-                      <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 ml-2">
+                    <div className="flex mb-4">
+                      <skillGroup.icon className="w-6 h-6 text-neutral-900 dark:text-neutral-50" />
+                      <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-50 ml-2 ">
                         {skillGroup.category}
                       </h3>
                     </div>

@@ -23,7 +23,7 @@ const Certificates = () => {
           delay={0.1}
           staggerDelay={0.1}
           direction="right"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6"
         >
           {certificatesAndBadges.map((certificate, index) => (
             <motion.a
@@ -36,7 +36,7 @@ const Certificates = () => {
               className="group relative bg-neutral-50 dark:bg-neutral-800/50 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300"
               whileHover={{ y: -5 }}
             >
-              <div className="aspect-[4/3] relative">
+              <div className="aspect-square relative">
                 <img
                   src={certificate.image}
                   alt={certificate.title}
