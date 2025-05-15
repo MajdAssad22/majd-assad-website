@@ -1,19 +1,60 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const encode = (data: Record<string, string>) =>
+  Object.keys(data)
+    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+
 const ContactForm = () => {
+  const navigate = useNavigate();
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+    "bot-field": "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (formState["bot-field"]) return; // honeypot spam check
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": "contact",
+        ...formState,
+      }),
+    })
+      .then(() => navigate("/thank-you"))
+      .catch((error) => alert(error));
+  };
+
   return (
     <div className="card h-full">
       <form
         name="contact"
         method="POST"
-        action="/thank-you"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
+        onSubmit={handleSubmit}
         className="space-y-6"
       >
         {/* Netlify Hidden Fields */}
         <input type="hidden" name="form-name" value="contact" />
-        <p className="sr-only">
+        <p style={{ display: "none" }}>
           <label>
-            Don’t fill this out if you’re human: <input name="bot-field" />
+            Don’t fill this out if you’re human:{" "}
+            <input name="bot-field" onChange={handleChange} />
           </label>
         </p>
 
@@ -28,6 +69,7 @@ const ContactForm = () => {
             type="text"
             id="name"
             name="name"
+            onChange={handleChange}
             required
             className="w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-neutral-900 dark:text-neutral-100 placeholder-neutral-500 dark:placeholder-neutral-400"
             placeholder="Your name"
@@ -45,6 +87,7 @@ const ContactForm = () => {
             type="email"
             id="email"
             name="email"
+            onChange={handleChange}
             required
             className="w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-neutral-900 dark:text-neutral-100 placeholder-neutral-500 dark:placeholder-neutral-400"
             placeholder="your.email@example.com"
@@ -62,6 +105,7 @@ const ContactForm = () => {
             type="text"
             id="subject"
             name="subject"
+            onChange={handleChange}
             required
             className="w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-neutral-900 dark:text-neutral-100 placeholder-neutral-500 dark:placeholder-neutral-400"
             placeholder="What's this about?"
@@ -78,6 +122,7 @@ const ContactForm = () => {
           <textarea
             id="message"
             name="message"
+            onChange={handleChange}
             required
             rows={4}
             className="w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-neutral-900 dark:text-neutral-100 placeholder-neutral-500 dark:placeholder-neutral-400"
