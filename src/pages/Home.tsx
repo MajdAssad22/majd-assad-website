@@ -53,7 +53,7 @@ const Home = () => {
 
                       {/* Hover Image */}
                       <div
-                        className={`absolute left-full ml-4 top-1/2 -translate-y-1/2 transition-all duration-300 ${
+                        className={`absolute invisible md:visible left-full ml-4 top-1/2 -translate-y-1/2 transition-all duration-300 ${
                           showImage
                             ? "opacity-100 translate-x-0"
                             : "opacity-0 -translate-x-2 pointer-events-none"

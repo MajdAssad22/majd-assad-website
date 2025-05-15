@@ -3,7 +3,7 @@ import { projects } from "../data/projects";
 import { useNavigate } from "react-router-dom";
 import { ExternalLink, Github } from "lucide-react";
 import { motion } from "framer-motion";
-import StaggeredList from "./StaggeredList";
+import ScrollAnimation from "./ScrollAnimation";
 
 interface PreviewPosition {
   x: number;
@@ -25,7 +25,7 @@ const ProjectTable = () => {
     });
   };
 
-  const handleRowClick = (projectSlug: string) => {
+  const navigateToProject = (projectSlug: string) => {
     navigate(`/projects/${projectSlug}`);
   };
 
@@ -47,58 +47,58 @@ const ProjectTable = () => {
       {/* Mobile Card Layout */}
       <div className="block md:hidden space-y-4">
         {projects.map((project) => (
-          <StaggeredList
-            delay={0.5}
-            staggerDelay={0.2}
-            direction="right"
+          <ScrollAnimation
             className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4 cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-700/50"
+            key={project.title}
           >
-            <h3 className="font-medium text-neutral-900 dark:text-neutral-50 mb-2">
-              {project.title}
-            </h3>
-            <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
-              {project.description}
-            </p>
-            <div className="flex flex-wrap gap-2 mb-3">
-              {project.technologies.map((tech) => (
-                <motion.span
-                  key={tech}
-                  className="px-2 py-1 text-xs bg-primary-500/10 text-primary-500 rounded-full"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {tech}
-                </motion.span>
-              ))}
+            <div onClick={() => navigateToProject(project.slug)}>
+              <h3 className="font-medium text-neutral-900 dark:text-neutral-50 mb-2">
+                {project.title}
+              </h3>
+              <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-2 mb-3">
+                {project.technologies.map((tech) => (
+                  <motion.span
+                    key={tech}
+                    className="px-2 py-1 text-xs bg-primary-500/10 text-primary-500 rounded-full"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    {tech}
+                  </motion.span>
+                ))}
+              </div>
+              <div className="flex gap-4">
+                {project.github && (
+                  <motion.a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-200 hover:bg-primary-500 rounded-full p-2 transition-colors duration-200"
+                    onClick={(e) => e.stopPropagation()}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <Github className="w-5 h-5" />
+                  </motion.a>
+                )}
+                {project.live && (
+                  <motion.a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-200 hover:bg-primary-500 rounded-full p-2 transition-colors duration-200"
+                    onClick={(e) => e.stopPropagation()}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                  </motion.a>
+                )}
+              </div>
             </div>
-            <div className="flex gap-4">
-              {project.github && (
-                <motion.a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-200 hover:bg-primary-500 rounded-full p-2 transition-colors duration-200"
-                  onClick={(e) => e.stopPropagation()}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Github className="w-5 h-5" />
-                </motion.a>
-              )}
-              {project.live && (
-                <motion.a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-200 hover:bg-primary-500 rounded-full p-2 transition-colors duration-200"
-                  onClick={(e) => e.stopPropagation()}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <ExternalLink className="w-5 h-5" />
-                </motion.a>
-              )}
-            </div>
-          </StaggeredList>
+          </ScrollAnimation>
         ))}
       </div>
 
@@ -135,7 +135,7 @@ const ProjectTable = () => {
                 onMouseEnter={() => setHoveredProject(project.title)}
                 onMouseLeave={() => setHoveredProject(null)}
                 onMouseMove={handleMouseMove}
-                onClick={() => handleRowClick(project.slug)}
+                onClick={() => navigateToProject(project.slug)}
               >
                 <td className="py-4 px-6">
                   <span className="font-medium text-neutral-900 dark:text-neutral-50">

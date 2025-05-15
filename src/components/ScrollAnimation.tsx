@@ -15,6 +15,7 @@ const ScrollAnimation = ({
   delay = 0,
   direction = "down",
   duration = 0.5,
+  ...rest
 }: ScrollAnimationProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -58,6 +59,7 @@ const ScrollAnimation = ({
       animate={isInView ? "visible" : "hidden"}
       variants={variants}
       className={className}
+      {...rest}
     >
       {children}
     </motion.div>
