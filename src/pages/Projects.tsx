@@ -59,7 +59,7 @@ const Projects = () => {
             delay={1.1}
             staggerDelay={0.1}
             direction="up"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
           >
             {filteredProjects.map((project) => (
               <div
