@@ -1,0 +1,7 @@
+# Allow all bots to crawl everything else
+User-agent: *
+Disallow:
+
+# Disallow Bingbot from crawling images folder
+User-agent: Bingbot
+Disallow: /images/
